@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contacto • Revolver</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+    <header class="site-header">
+        <div class="container header-inner">
+        <a href="index.html" class="brand">
+            <span class="logo-dot"></span>
+            <span class="brand-name">Revolver</span>
+        </a>
+        <nav class="main-nav">
+            <a href="index.html#productos">Productos</a>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="promociones.html">Promociones</a>
+            <a href="contacto.html" aria-current="page">Contacto</a>
+        </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero hero-simple">
+        <div class="container hero-inner">
+            <h1>Contacto</h1>
+            <p>¿Dudas, consultas o colaboración? Escribinos y respondemos a la brevedad.</p>
+        </div>
+        </section>
+
+        <section class="container section">
+        <div class="contact-grid">
+            <form id="form-contacto" class="form-card">
+            <div class="form-row">
+                <label for="c-nombre">Nombre</label>
+                <input type="text" id="c-nombre" name="nombre" placeholder="Tu nombre" required>
+            </div>
+
+            <div class="form-row">
+                <label for="c-email">Email</label>
+                <input type="email" id="c-email" name="email" placeholder="tuemail@ejemplo.com" required>
+            </div>
+
+            <div class="form-row">
+                <label for="c-mensaje">Mensaje</label>
+                <textarea id="c-mensaje" name="mensaje" rows="5" placeholder="Contanos en qué te ayudamos" required></textarea>
+            </div>
+
+            <button class="btn btn-cta" type="submit">Enviar</button>
+            <div class="form-msg" id="contacto-msg" role="status" aria-live="polite"></div>
+            </form>
+
+            <aside class="contact-aside">
+            <h3>Datos útiles</h3>
+            <p><strong>IG:</strong> @revolver.circular</p>
+            <p><strong>Email:</strong> hola@revolver.com</p>
+            <p><strong>Ubicación:</strong> Buenos Aires, AR</p>
+            <p>Atendemos de Lun a Sáb de 10 a 19h.</p>
+            </aside>
+        </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+        <div>
+            <h4>Revolver</h4>
+            <p>Moda circular curada. Buenos Aires, AR</p>
+        </div>
+        <div>
+            <h4>Contacto</h4>
+            <p>IG: @revolver.circular</p>
+            <p>Mail: hola@revolver.com</p>
+        </div>
+        <div>
+            <h4>Legal</h4>
+            <p>Términos y Condiciones</p>
+        </div>
+        </div>
+        <div class="copy">© 2025 Revolver. Hecho con ♻️</div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

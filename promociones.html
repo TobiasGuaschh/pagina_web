@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Promociones • Revolver</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+    <header class="site-header">
+        <div class="container header-inner">
+        <a href="index.html" class="brand">
+            <span class="logo-dot"></span>
+            <span class="brand-name">Revolver</span>
+        </a>
+        <nav class="main-nav">
+            <a href="index.html#productos">Productos</a>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="promociones.html" aria-current="page">Promociones</a>
+            <a href="contacto.html">Contacto</a>
+        </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero hero-simple">
+        <div class="container hero-inner">
+            <h1>Promos activas</h1>
+            <p>Ofertas temporales y beneficios para que te lleves eso que te encanta.</p>
+        </div>
+        </section>
+
+        <section class="container section">
+        <div class="promo-grid">
+            <article class="promo-card" style="--promo-bg: var(--yellow)">
+            <h3>2x1 en camisas</h3>
+            <p>Llevás 2, pagás 1 en la categoría camisas seleccionadas.</p>
+            <a class="btn btn-ghost" href="index.html#productos">Ver camisas</a>
+            </article>
+
+            <article class="promo-card" style="--promo-bg: var(--lila)">
+            <h3>-20% en camperas</h3>
+            <p>Descuento aplicado en el checkout. Por tiempo limitado.</p>
+            <a class="btn btn-ghost" href="index.html#productos">Ver camperas</a>
+            </article>
+
+            <article class="promo-card" style="--promo-bg: var(--orange)">
+            <h3>Envíos low cost</h3>
+            <p>Tarifa reducida en CABA y AMBA para compras desde $40.000.</p>
+            <a class="btn btn-ghost" href="index.html#productos">Ver todo</a>
+            </article>
+        </div>
+        </section>
+
+        <section class="container section newsletter">
+        <div class="newsletter-inner">
+            <h2>Sumate a las novedades</h2>
+            <p>Te avisamos cuando haya nuevos ingresos y promociones.</p>
+            <form class="inline-form" id="form-news">
+            <input type="email" name="email" placeholder="tuemail@ejemplo.com" required>
+            <button class="btn btn-cta" type="submit">Suscribirme</button>
+            </form>
+            <div class="form-msg" id="news-msg" role="status" aria-live="polite"></div>
+        </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+        <div>
+            <h4>Revolver</h4>
+            <p>Moda circular curada. Buenos Aires, AR</p>
+        </div>
+        <div>
+            <h4>Contacto</h4>
+            <p>IG: @revolver.circular</p>
+            <p>Mail: hola@revolver.com</p>
+        </div>
+        <div>
+            <h4>Legal</h4>
+            <p>Términos y Condiciones</p>
+        </div>
+        </div>
+        <div class="copy">© 2025 Revolver. Hecho con ♻️</div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

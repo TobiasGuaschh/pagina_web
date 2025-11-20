@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Revolver - Moda Circular</title>
+
+    <!-- Tipografías -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Estilos -->
+    <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+    <header class="site-header">
+        <div class="container header-inner">
+        <a href="index.html" class="brand">
+            <span class="logo-dot"></span>
+            <span class="brand-name">Revolver</span>
+        </a>
+        <nav class="main-nav">
+            <a href="index.html#productos">Productos</a>
+            <a href="nosotros.html">Nosotros</a>
+            <a href="promociones.html">Promociones</a>
+            <a href="contacto.html">Contacto</a>
+        </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-inner">
+        <h1>Moda circular con estilo</h1>
+        <p>Elegí prendas únicas, con historia y en excelente estado. Re-estrenar es mejor.</p>
+        <a class="btn btn-cta" href="#productos">Ver productos</a>
+        </div>
+    </section>
+
+    <main>
+        <section id="productos" class="container section">
+        <h2 class="section-title">Productos</h2>
+        <div id="grid-productos" class="product-grid" aria-live="polite"></div>
+        </section>
+        <!-- Carrusel de imágenes -->
+        <section class="container section" id="carrusel">
+            <div class="carousel">
+                <button class="car-btn prev" aria-label="Anterior">‹</button>
+
+                <div class="car-window">
+                    <ul class="car-track" id="car-track">
+                <!-- las slides se inyectan con JS -->
+                    </ul>
+                </div>
+
+                <button class="car-btn next" aria-label="Siguiente">›</button>
+            </div>
+        </section>
+
+
+        <section id="como-funciona" class="container section">
+        <h2 class="section-title">Cómo funciona</h2>
+        <div class="steps">
+            <div class="step">
+            <div class="step-num">1</div>
+            <h3>Elegí</h3>
+            <p>Buscá por categorías y encontrá prendas con excelente relación precio/calidad.</p>
+            </div>
+            <div class="step">
+            <div class="step-num">2</div>
+            <h3>Probá / Comprá</h3>
+            <p>Coordinamos envío o retiro, y si querés pasar a probar, ¡genial!</p>
+            </div>
+            <div class="step">
+            <div class="step-num">3</div>
+            <h3>Re-estrená</h3>
+            <p>Dale otra vida a la prenda. Más circular, menos desperdicio.</p>
+            </div>
+        </div>
+        </section>
+    </main>
+
+    <footer id="contacto" class="site-footer">
+        <div class="container footer-inner">
+        <div>
+            <h4>Revolver</h4>
+            <p>Moda circular curada. Buenos Aires, AR</p>
+        </div>
+        <div>
+            <h4>Contacto</h4>
+            <p>IG: @revolver.circular</p>
+            <p>Mail: hola@revolver.com</p>
+        </div>
+        <div>
+            <h4>Legal</h4>
+            <p>Términos y Condiciones</p>
+        </div>
+        </div>
+        <div class="copy">© 2025 Revolver. Hecho con ♻️</div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

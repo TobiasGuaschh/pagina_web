@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Producto • Revolver</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+    <header class="site-header">
+        <div class="container header-inner">
+        <a href="index.html" class="brand">
+            <span class="logo-dot"></span>
+            <span class="brand-name">Revolver</span>
+        </a>
+        <nav class="main-nav">
+            <a href="index.html#productos">Productos</a>
+            <a href="index.html#como-funciona">Cómo funciona</a>
+            <a href="index.html#contacto">Contacto</a>
+        </nav>
+        </div>
+    </header>
+
+    <main class="container section">
+        <a class="back-link" href="index.html#productos">← Volver</a>
+
+        <section id="ficha" class="product-detail">
+        <!-- Galería -->
+        <div class="gallery">
+            <div class="gallery-main">
+            <img id="img-principal" src="" alt="Imagen principal del producto">
+            </div>
+            <div class="gallery-thumbs" id="thumbs"></div>
+        </div>
+
+        <!-- Info -->
+        <div class="info">
+            <h1 id="prod-title">Producto</h1>
+            <div class="price-line">
+            <span id="prod-price" class="price">$ 00.000</span>
+            </div>
+
+            <p id="prod-desc" class="desc">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer feugiat, risus id efficitur commodo, eros lectus
+            mattis erat, eget gravida arcu augue in risus. Maecenas tempor nisl quam, in convallis metus dapibus et.
+            </p>
+
+            <div class="measures">
+            <h3>Medidas (cm)</h3>
+            <table>
+                <tbody id="measures-body">
+                <!-- Cargado por JS -->
+                </tbody>
+            </table>
+            </div>
+
+            <div class="detail-actions">
+            <button class="btn btn-cta">Agregar al carrito</button>
+            <button class="btn btn-ghost">Consultar</button>
+            </div>
+        </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+        <div>
+            <h4>Revolver</h4>
+            <p>Moda circular curada. Buenos Aires, AR</p>
+        </div>
+        <div>
+            <h4>Contacto</h4>
+            <p>IG: @revolver.circular</p>
+            <p>Mail: hola@revolver.com</p>
+        </div>
+        <div>
+            <h4>Legal</h4>
+            <p>Términos y Condiciones</p>
+        </div>
+        </div>
+        <div class="copy">© 2025 Revolver. Hecho con ♻️</div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
