@@ -1,5 +1,5 @@
 const PRODUCTS = [
-  { id: "blazer", title: "Blazer gris", price: "$ 49.900", firstExt: "png", measures: { Hombro: 44, Pecho: 52, Largo: 72 } },
+  { id: "blazer", title: "Blazer gris", price: "$ 49.900", firstExt: "jpg", measures: { Hombro: 44, Pecho: 52, Largo: 72 } },
   { id: "buzo_nike", title: "Buzo Nike", price: "$ 32.500", firstExt: "jpg", measures: { Pecho: 56, Largo: 70 } },
   { id: "camisa_brooksfield", title: "Camisa Brooksfield", price: "$ 28.900", firstExt: "jpg", measures: { Hombro: 43, Pecho: 50, Largo: 74 } },
   { id: "camisa_tommy", title: "Camisa Tommy", price: "$ 35.700", firstExt: "jpg", measures: { Hombro: 44, Pecho: 52, Largo: 76 } },
@@ -16,62 +16,23 @@ const PRODUCTS = [
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
 const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
-function imagePath(id, index, firstExt) {
-  const ext = index === 1 ? firstExt : "jpg";
-  return `img/${id}/${index}.${ext}`;
-}
-function byId(id) { return PRODUCTS.find(p => p.id === id); }
-
-function renderProduct() {
-  const gallery = document.getElementById('product-gallery');
-  const detail = document.getElementById('product-detail');
-  if (!gallery || !detail) return;
-
-  const params = new URLSearchParams(location.search);
-  const id = parseInt(params.get('id'), 10);
-  const p = byId(id);
-  if (!p) return;
-
-  const titleEl = detail.querySelector('h1');
-  const priceEl = detail.querySelector('.price');
-  const descEl = detail.querySelector('.desc');
-  const measuresEl = detail.querySelector('.measures');
-
-  if (titleEl) titleEl.textContent = p.title;
-  if (priceEl) priceEl.textContent = p.price;
-  if (descEl) descEl.textContent = p.description || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Podés escribir acá la descripción real después.';
-  if (measuresEl) measuresEl.textContent = p.measures || 'Medidas aproximadas: busto 45 cm, largo 60 cm (ejemplo, después lo cambiás).';
-
-  gallery.innerHTML = `
-    <div class="gallery-main">
-      <img src="${imagePath(p.id, 1, p.firstExt)}" alt="${p.title}">
-    </div>
-    <div class="gallery-thumbs">
-      <img src="${imagePath(p.id, 1, p.firstExt)}" alt="${p.title}">
-      <img src="${imagePath(p.id, 2, p.firstExt)}" alt="${p.title}">
-      <img src="${imagePath(p.id, 3, p.firstExt)}" alt="${p.title}">
-    </div>
-  `;
-
-  const mainImg = gallery.querySelector('.gallery-main img');
-  const thumbs = gallery.querySelectorAll('.gallery-thumbs img');
-
-  thumbs.forEach(img => {
-    img.addEventListener('click', () => {
-      mainImg.src = img.src;
-    });
-  });
+function byId(id) {
+  return PRODUCTS.find(p => p.id === id);
 }
 
+function imagePath(id, index) {
+  return `img/${id}/${index}.jpg`;
+}
 
 
 function renderHome() {
-  const wrap = document.getElementById('grid-productos');
+  const wrap = $('#grid-productos');
   if (!wrap) return;
+
   wrap.innerHTML = PRODUCTS.map(p => `
     <article class="card">
       <a class="card-media" href="producto.html?id=${p.id}">
-        <img src="${imagePath(p.id, 1, p.firstExt)}" alt="${p.title}">
+        <img src="${imagePath(p.id, 1)}" alt="${p.title}">
       </a>
       <div class="card-body">
         <h3 class="card-title">${p.title}</h3>
@@ -85,8 +46,50 @@ function renderHome() {
   `).join('');
 }
 
+function renderProductDetail() {
+  const detail = $('#product-detail');
+  if (!detail) return;
+
+  const params = new URLSearchParams(location.search);
+  const id = params.get('id');
+  const product = byId(id);
+
+  if (!product) {
+    detail.innerHTML = `<p>Producto no encontrado.</p>`;
+    return;
+  }
+
+  const gallery = $('#product-gallery');
+  gallery.innerHTML = `
+    <div class="gallery-main">
+      <img id="main-img" src="${imagePath(product.id, 1)}" alt="${product.title}">
+    </div>
+    <div class="gallery-thumbs">
+      <img data-i="1" src="${imagePath(product.id, 1)}" alt="">
+      <img data-i="2" src="${imagePath(product.id, 2)}" alt="">
+      <img data-i="3" src="${imagePath(product.id, 3)}" alt="">
+    </div>
+  `;
+
+  $('#product-detail h1').textContent = product.title;
+  $('.price').textContent = product.price;
+  $('.desc').textContent = "Prenda en excelente estado. Descripción pendiente.";
+  
+  const measures = $('.measures');
+  measures.innerHTML = Object.entries(product.measures)
+    .map(([k,v]) => `<p>${k}: ${v} cm</p>`)
+    .join('');
+
+  const mainImg = $('#main-img');
+  $$('.gallery-thumbs img').forEach(img => {
+    img.addEventListener('click', () => {
+      mainImg.src = imagePath(product.id, img.dataset.i);
+    });
+  });
+}
+
 function renderFicha() {
-  const ficha = document.getElementById('ficha');
+  const ficha = $('#ficha');
   if (!ficha) return;
 
   const params = new URLSearchParams(location.search);
@@ -94,107 +97,74 @@ function renderFicha() {
   const prod = byId(id);
 
   if (!prod) {
-    ficha.innerHTML = `<p>No encontramos este producto. <a href="index.html#productos">Volver</a></p>`;
+    ficha.innerHTML = `<p>No encontramos este producto.</p>`;
     return;
   }
 
   $('#prod-title').textContent = prod.title;
   $('#prod-price').textContent = prod.price;
-  $('#prod-desc').textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer feugiat, risus id efficitur commodo, eros lectus mattis erat, eget gravida arcu augue in risus. Maecenas tempor nisl quam, in convallis metus dapibus et. Integer posuere, arcu in blandit pellentesque, ex mi varius nibh, sit amet lacinia arcu magna sit amet est.";
 
   const main = $('#img-principal');
-  main.src = imagePath(prod.id, 1, prod.firstExt);
-  main.alt = prod.title;
+  main.src = imagePath(prod.id, 1);
 
   const thumbs = $('#thumbs');
-  thumbs.innerHTML = [1, 2, 3].map(i => `
-    <img data-i="${i}" src="${imagePath(prod.id, i, prod.firstExt)}" alt="Vista ${i} de ${prod.title}">
+  thumbs.innerHTML = [1,2,3].map(i => `
+    <img data-i="${i}" src="${imagePath(prod.id, i)}">
   `).join('');
 
   $$('#thumbs img').forEach(img => {
     img.addEventListener('click', () => {
-      const i = Number(img.dataset.i);
-      main.src = imagePath(prod.id, i, prod.firstExt);
+      main.src = imagePath(prod.id, img.dataset.i);
     });
   });
 
   const tbody = $('#measures-body');
-  tbody.innerHTML = Object.keys(prod.measures || {}).map(k => `
-    <tr><td>${k}</td><td>${prod.measures[k]} cm</td></tr>
-  `).join('') || `<tr><td colspan="2">—</td></tr>`;
+  tbody.innerHTML = Object.keys(prod.measures)
+    .map(k => `<tr><td>${k}</td><td>${prod.measures[k]} cm</td></tr>`)
+    .join('');
+}
+
+function renderCarousel() {
+  const track = $('#car-track');
+  if (!track) return;
+
+  const FOLDERS = PRODUCTS.map(p => p.id);
+
+  track.innerHTML = FOLDERS.map(f => `
+    <li class="car-slide"><img src="${imagePath(f, 1)}" alt="${f}"></li>
+  `).join('');
 }
 
 function handleContact() {
-  const form = document.getElementById('form-contacto');
+  const form = $('#form-contacto');
   if (!form) return;
-  const msg = document.getElementById('contacto-msg');
 
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const data = new FormData(form);
-    const nombre = data.get('nombre')?.trim();
-    const email = data.get('email')?.trim();
-    const texto = data.get('mensaje')?.trim();
-    if (!nombre || !email || !texto) {
-      msg.textContent = 'Completá todos los campos 🙏';
-      return;
-    }
-    msg.textContent = '¡Gracias! Te escribiremos a la brevedad.';
+    const msg = $('#contacto-msg');
+    msg.textContent = "¡Mensaje enviado!";
     form.reset();
   });
 }
 
 function handleNews() {
-  const form = document.getElementById('form-news');
+  const form = $('#form-news');
   if (!form) return;
-  const msg = document.getElementById('news-msg');
 
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const email = new FormData(form).get('email')?.trim();
-    if (!email) {
-      msg.textContent = 'Ingresá tu email para suscribirte.';
-      return;
-    }
-    msg.textContent = '¡Listo! Te sumamos a la lista de novedades.';
+    const msg = $('#news-msg');
+    msg.textContent = "¡Listo! Te sumamos a novedades.";
     form.reset();
-  });
-}
-
-function renderCarousel() {
-  const track = document.getElementById('car-track');
-  if (!track) return;
-
-  const FOLDERS = [
-    'blazer','buzo_nike','camisa_brooksfield','camisa_tommy','camisa_zara',
-    'campera_lacoste','campera_stwd','campera_zara','cartera_blanca',
-    'cartera_negra','chaleco','zapatillas'
-  ];
-  const firstImage = f => f === 'blazer' ? `img/${f}/1.png` : `img/${f}/1.jpg`;
-
-  track.innerHTML = FOLDERS.map(f => `
-    <li class="car-slide"><img src="${firstImage(f)}" alt="${f.replaceAll('_',' ')}"></li>
-  `).join('');
-
-  const wnd = track.parentElement;
-  const prev = document.querySelector('.car-btn.prev');
-  const next = document.querySelector('.car-btn.next');
-  const step = () => Math.max(wnd.clientWidth * 0.85, 280);
-
-  prev?.addEventListener('click', () => { wnd.scrollLeft -= step(); });
-  next?.addEventListener('click', () => { wnd.scrollLeft += step(); });
-
-  let auto = setInterval(() => { wnd.scrollLeft += step() / 2; }, 3000);
-  wnd.addEventListener('mouseenter', () => clearInterval(auto));
-  wnd.addEventListener('mouseleave', () => {
-    auto = setInterval(() => { wnd.scrollLeft += step() / 2; }, 3000);
   });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   renderHome();
+  renderProductDetail();
   renderFicha();
   renderCarousel();
   handleContact();
   handleNews();
 });
+
